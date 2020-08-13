@@ -18,7 +18,8 @@ const getData = uri => {
         document.getElementById('temp').innerHTML = `${temp} °C`;
         document.getElementById('weath').innerHTML = `${weath} (${status})`;
         document.getElementById('icon').innerHTML = `<img src="https://openweathermap.org/img/w/${icon}.png" alt="${weath}icon" >`;
-    });
+    })
+    .catch((reason) => console.log);
 };
 
 city_btn.onclick = () => {
