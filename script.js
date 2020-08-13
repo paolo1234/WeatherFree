@@ -17,7 +17,7 @@ const getData = uri => {
         document.getElementById('city').innerHTML = data.name;
         document.getElementById('temp').innerHTML = `${temp} °C`;
         document.getElementById('weath').innerHTML = `${weath} (${status})`;
-        document.getElementById('icon').innerHTML = `<img src="http://openweathermap.org/img/w/${icon}.png" alt="${weath}icon" >`;
+        document.getElementById('icon').innerHTML = `<img src="https://openweathermap.org/img/w/${icon}.png" alt="${weath}icon" >`;
     });
 };
 
@@ -32,7 +32,7 @@ localization.onclick =  () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => { 
             const {latitude, longitude} = position.coords;
-            const uri = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
+            const uri = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
             getData(uri);
         });
     }
