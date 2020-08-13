@@ -19,7 +19,7 @@ const getData = uri => {
         document.getElementById('weath').innerHTML = `${weath} (${status})`;
         document.getElementById('icon').innerHTML = `<img src="https://openweathermap.org/img/w/${icon}.png" alt="${weath}icon" >`;
     })
-    .catch((reason) => {console.log("It was not possible to load data from server 'cause: ",reason); alert("Enter a valid place")});
+    .catch((reason) => {console.log("It was not possible to load data from server 'cause: ",reason); alert("Enter a valid place");});
 };
 
 city_btn.onclick = () => {
