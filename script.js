@@ -1,75 +1,46 @@
 //  Paolo Calamia Weather 
 
-var key = 'a5aebe0391eb5c24964f1368526971c0'; // API Key 
+import {getKey} from './API_KEY.js';
 
-city_btn.onclick = function () {
-    var city = document.getElementById('city_txt').value; // Prendo i dati da input
-    var country = document.getElementById('country').value; // Necessario in caso ci siano più città con lo stesso nome
-    var uri = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&units=metric' + '&appid=' + key; // Call
-    var request = new XMLHttpRequest();
-    request.open('GET', uri, true);
-    request.onload = function () {
-        var data = JSON.parse(this.response);
-        var temp = parseInt(data.main.temp);
-        var weath = data.weather[0].main;
-        var icon = data.weather[0].icon;
-        var status = getStatus(icon);
+const API_KEY = getKey();
+
+const getData = uri => {
+    fetch(uri)
+    .then((response) => response.json())
+    .then((data) => {
+        const {main, weather} = data;
+        let temp = parseInt(main.temp);
+        let weath = weather[0].main;
+        let icon = weather[0].icon;
+        let status = getStatus(icon);
         weath = translateWeather(weath);
-
-        /* Stampo i dati nella pagina HTML */
         document.getElementById('city').innerHTML = data.name;
-        document.getElementById('temp').innerHTML = temp + ' °C';
-        document.getElementById('weath').innerHTML = weath + ' (' + status + ') ';
-        document.getElementById('icon').innerHTML = '<img src="http://openweathermap.org/img/w/' + icon + '.png" alt="' + weath + ' icon" >';
-    }
-    request.send();
-}
+        document.getElementById('temp').innerHTML = `${temp} °C`;
+        document.getElementById('weath').innerHTML = `${weath} (${status})`;
+        document.getElementById('icon').innerHTML = `<img src="http://openweathermap.org/img/w/${icon}.png" alt="${weath}icon" >`;
+    });
+};
 
+city_btn.onclick = () => {
+    const city = document.getElementById('city_txt').value; 
+    const country = document.getElementById('country').value;
+    const uri = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&appid=${API_KEY}`;
+    getData(uri);
+};
 
-localization.onclick = function () {
+localization.onclick =  () => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) { // Acquisisco lat e lon dalla geolocalizzazione
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            var uril = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric' + '&appid=' + key;
-            var reql = new XMLHttpRequest();
-            reql.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    var datal = JSON.parse(this.responseText);
-                    var city = datal.name;
-                    var temp = parseInt(datal.main.temp);
-                    var weath = datal.weather[0].main;
-                    var icon = datal.weather[0].icon;
-                    var status = getStatus(icon);
-                    weath = translateWeather(weath);
-
-
-                    document.getElementById('city').innerHTML = city;
-                    document.getElementById('temp').innerHTML = temp + ' °C';
-                    document.getElementById('weath').innerHTML = weath + ' (' + status + ') ';
-                    document.getElementById('icon').innerHTML = '<img src="http://openweathermap.org/img/w/' + icon + '.png" alt="' + weath + ' icon" >';
-                }
-
-            };
-            reql.open("GET", uril, true);
-            reql.send();
+        navigator.geolocation.getCurrentPosition((position) => { 
+            const {latitude, longitude} = position.coords;
+            const uri = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
+            getData(uri);
         });
-
-
     }
-    ;
+};
 
+const getStatus = icon => (icon[2] == 'n') ? 'Notte' : 'Giorno';
 
-}
-
-function getStatus(icon) {
-    if (icon[2] == 'n') {
-        return 'Notte';
-    }
-    return 'Giorno';
-}
-
-function translateWeather(weath) {
+const translateWeather = weath => {
     switch (weath) {
         case 'Clouds' :
             return 'Nuvoloso';

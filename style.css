@@ -1,34 +1,39 @@
-/* Paolo Calamia Weather */
-html,body{margin: 0;padding: 0;height: 100%;}
-body{ background-image: url('bg.jpg'); background-repeat: no-repeat; background-size: 100%;background-origin: center;}
-/* Input */
-input[type="text"]{
-  background-color: rgba(0, 78, 102, .7);
-  color: white;
-  border-radius: 2px;
-  box-shadow: none;
-  text-align: center;
-  border: none;
-  padding: 8px 16px;
+html,body{
+    min-height: 100%;
+}
+body{
+    min-height: 100%;
+    background: url('bg.jpg') no-repeat;
+    background-origin: center;
+    background-size: 100%; 
+}
+#root{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#country { width: 30px; }
-/*Output */
-.logo{ width: 100%;}
-.logo img{ width: 300px; margin-top: 10px;}
-.search { margin: 0 auto; width: 300px; margin-top: 70px; margin-bottom: 50px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;}
-.weather{
-width: 300px; 
-height: 300px;
-margin: 0 auto;
-background: rgba(0,0,0,0.5);
-border-radius: 5px;
-padding: 10px;
-color: #fff;
+.logo{
+    width: 548px; 
+    height: 90px;
+    background-image: url('logo.png');
 }
+
+input[type="text"]{
+    background-color: rgba(0, 78, 102, .7);
+    color: white;
+    border-radius: 2px;
+    box-shadow: none;
+    text-align: center;
+    border: none;
+    padding: 13px 10px;
+    margin: 5px;
+    font-size: 16px;
+}
+#country { width: 30px; }
 
 button{
-	margin-top: 5px;
+	margin: 5px;
 	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
 	background-color:#44c767;
 	border:1px solid #18ab29;
@@ -37,7 +42,7 @@ button{
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding: 6px 14px;
+	padding: 8px 14px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 }
@@ -49,20 +54,41 @@ button:hover {
     position:relative;
 	top:1px;
  }
-
+.search {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 300px; 
+    background: rgba(0,0,0,0.5); 
+    padding: 20px; 
+    margin:20px; 
+    border-radius: 5px;
+}
 
 .weather{
-	font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px; 
+    height: 300px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    padding: 20px;
+    color: #fff;
+    font-family: sans-serif;
 	font-size: 30px;
 	text-align: center;
 }
 
-span {
-	padding: 10px;
+#icon {
+    width: 60px; height: 60px;
 }
-span img{width: 60px; height: 60px;}
-p{ color: #fff; margin-left: 30px; }
 
+#icon img{width: 60px; height: 60px;}
+
+.info{
+    padding: 20px;
+}
 /* Placeholder */
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, .80);
@@ -75,4 +101,9 @@ p{ color: #fff; margin-left: 30px; }
 }
 :-moz-placeholder { /* Firefox 18- */
   color: rgba(255, 255, 255, .80);
+}
+
+.footer p{
+    padding: 20px;
+    font-size: 1.5em;
 }
