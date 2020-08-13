@@ -1,0 +1,32 @@
+<!--  Paolo Calamia Weather -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title> Previsioni Meteo </title>
+	<link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+<body>
+    <div class="logo"> <center><img src="logo.png" alt="Logo"></center></div>
+    <div class="search"> 
+    <center>
+        <input type="text" id="city_txt" placeholder="Inserisci città o CAP"> 
+        <input type="text" id="country" value="IT" placeholder="Country"> <br />
+        <button id="city_btn"> Cerca </button> 
+        <button id="localization"> Ottieni posizione </button> 
+    </center>
+    </div>
+
+    <div class="weather"> 
+     <span id="city">Città sconosciuta</span> <br /> <br />
+     <span id="temp">0°C</span> <br /> <br />
+     <span id="weath" style="display:inherit">Neve</span>
+     <span id="icon"></span>
+    </div>
+   
+<div class="footer"> <p> Realizzato da:  Paolo Calamia &copy; 2018 </p></div>
+ <script src="script.js"></script>
+</body>
+</html>
